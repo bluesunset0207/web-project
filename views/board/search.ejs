@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %></title>
+    <link href="/public/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <h1>검색 결과</h1>
+    <ul>
+        <% post.forEach(post => { %>
+            <li><a href="/board/read/<%= post.idx %>"><%= post.title %></a></li>
+        <% }) %>
+    </ul>
+</body>
+
+</html>

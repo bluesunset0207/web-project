@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글 작성</title>
+    <link href="/public/main.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>글 작성</h1>
+
+    <form action="/board/write" method="post" enctype="multipart/form-data">
+
+        <div>
+            <label for="category">카테고리:</label>
+            <select id="category" name="category">
+                <% categories.forEach(c => { %>
+                    <option value="<%= c %>"><%= c %></option>
+                <% }) %>
+            </select><br>
+        </div>
+
+        <div>
+            <label for="title">제목:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        
+        <div>
+            <label for="content">내용:</label>
+            <textarea id="content" name="content" rows="10" required></textarea>
+        </div>
+
+        <div>
+            <label for="file">파일:</label>
+            <input type="file" id="file" name="file" />
+        </div>
+
+        <label for="secret">비밀글:</label>
+        <input type="checkbox" id="secret" name="secret">
+
+        <label for="password">비밀번호 (비밀글일 경우):</label>
+        <input type="password" id="password" name="password">
+
+        <div>
+            <button type="submit">글 작성</button>
+        </div>
+    </form>
+
+    <a href="/">취소하고 돌아가기</a>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/public/main.css" rel="stylesheet" />
+</head>
+<body>
+    <h1><%= locals.title %></h1>
+
+    <% if (user) { %>
+        <p>환영합니다, <%= user.username %>님!</p>
+        <a href="/auth/logout">로그아웃</a>
+    <% } else { %>
+        <a href="/auth/login">로그인</a>
+        <a href="/auth/signup">회원가입</a>
+    <% } %>
+
+    <br>
+
+    <% categories.forEach(c => { %>
+        <a href="/board/main/<%= c %>" class="board-link"><%= c %>게시판</button> <br>
+    <% }) %>
+
+</body> 
+</html>

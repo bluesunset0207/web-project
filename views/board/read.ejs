@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %></title>
+    <link href="/public/main.css" rel="stylesheet" />
+</head>
+<body>
+    <h1><%= post.title %></h1>
+    <p><%= post.content %></p>
+
+    <div>
+        <% if (post.filePath && post.fileName) { %>
+          <h3>첨부 파일</h3>
+          <a href="/board/files/<%= post.fileName %>" download="<%= post.fileName %>">
+            <%= post.fileName %>
+          </a>
+        <% } %>
+    </div>
+    
+    <div>
+        <h3>댓글</h3>
+        <ul>
+            <% comments.forEach(comment => { %>
+                <li>
+                    <%= comment.writer %>: <%= comment.content %>
+                    <% if (user && user.username === comment.writer) { %>
+                        <form action="/board/comment/<%= comment.idx %>/edit" method="get">
+                            <button type="submit">댓글 수정</button>
+                        </form>
+                        <form action="/board/comment/<%= comment.idx %>/delete" method="post">
+                            <button type="submit">댓글 삭제</button>
+                        </form>
+                    <% } %>
+                </li>
+            <% }) %> 
+        </ul>
+    </div>
+
+    
+
+    <div>
+        <h3>댓글 작성</h3>
+        <form action="/board/comment/<%= post.idx %>" method="post">
+            <textarea name="content" placeholder="댓글을 입력하세요" required></textarea>
+            <button type="submit">댓글 작성</button>
+        </form>
+    </div>
+
+    <div>
+        <span>추천수: <%= recommendnum %></span>
+        <% if (isrecommend) { %>
+            <button disabled>추천함</button>
+        <% } else { %>
+            <form action="/board/recommend/<%= post.idx %>" method="post">
+                <button type=""submit>추천</button>
+            </form>
+        <% } %>
+    </div>
+
+    <% if (iswriter || isadmin) { %>
+
+        <% if (iswriter) { %>
+            <form action="/board/edit/<%= post.idx %>" method="get">
+                <button type="submit">글 수정</button>
+            </form>
+        <% } %>
+
+        <form action="/board/delete/<%= post.idx %>" method="post">
+            <button type="submit">글 삭제</button>
+        </form>
+    <% } %>
+
+    <a href="/board/main/<%= post.category %>">목록으로 돌아가기</a>
+</body>
+</html>
+    
